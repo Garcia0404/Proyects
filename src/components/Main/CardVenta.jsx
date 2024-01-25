@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 
-export function CardVenta({nombreProducto, uid, stock="unknow", precio, children}) {
+export function CardVenta({nombreProducto, id, stock="unknow", precio}) {
   const precioD = parseFloat(precio);
   const dolares = (precioD / 3.70).toFixed(2);
 // cambio de color del corazón
@@ -12,12 +12,11 @@ export function CardVenta({nombreProducto, uid, stock="unknow", precio, children
   const classHeart = (heart)?'fill-white':'fill-transparent stroke-2 stroke-white'  
 
   return (
-    <article className='group/item relative w-48 border border-gray-200 rounded-xl text-center p-3'>
-      <img src={`./src/img/${uid}.jpg`} alt={uid}/>
-      <h3>{nombreProducto}</h3>
-      <p>{children}</p>
-      <span>{uid} <br></br> Stock: {stock}</span>
-      <button type='button' className='bg-[#131921] text-white block rounded w-11/12 mx-auto p-1 text-nowrap'>${dolares} - S/{precio}</button>
+    <article className='group/item relative w-48 border border-gray-200 rounded-xl text-center p-3 z-1'>
+      <img className='mb-3' src={`./src/assets/img/${id}.jpg`} alt={id}/>
+      <h3 className='text-sm'>{nombreProducto}</h3>
+      <span className='text-blue-800 text-sm'><strong>ID: </strong>{id} <br></br> <strong>STOCK: </strong>{stock}</span>
+      <button type='button' className='bg-[#131921] text-white block rounded w-11/12 mx-auto p-1 text-nowrap mt-2'>${dolares} - S/{precio}</button>
 
       <div className='absolute top-0 start-0 group/edit invisible scale-0 transition-all group-hover/item:visible group-hover/item:scale-100'>
         <div className='m-2 p-2 rounded-full bg-[#131921] cursor-pointer'>
