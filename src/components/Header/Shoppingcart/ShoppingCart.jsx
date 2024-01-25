@@ -1,22 +1,22 @@
-import React,{useContext} from 'react'
+import React,{useContext,useEffect} from 'react'
 import  CardCart  from './CardCart';
 import {newproducts} from '../../../utils/produts.js'
 import { UsuarioContext } from '../../../context/AppContext.jsx';
 export const ShoppingCart = () => {
-  const{openShop}=useContext(UsuarioContext)
+  const{openShop,cartItems}=useContext(UsuarioContext)
   const{openShoppingCart}=useContext(UsuarioContext)
 
 //Mejorar esto-------------------------------------------------
   const close = openShop?'overflow-auto absolute top-0 right-0 h-dvh w-full min-[350px]:w-80 bg-white text-black z-[10] shadow-[0_0_0_100vmax_rgba(0,0,0,.5)] translate-x-0 visible transition-all ease-in-out duration-300':'absolute top-0 right-0 h-dvh w-3/4 sm:w-2/5 rounded-s-3xl bg-white text-black z-[10] shadow-[0_0_0_100vmax_rgba(0,0,0,.5)] translate-x-[100%] invisible transition-all ease-in-out duration-300'
-
+  useEffect(()=>console.log(cartItems),[cartItems])
   return (
     <>
       <section className={close}>
         <div className='w-full z-3 p-2'>
           <ul className='list-none grid gap-2'>
             {
-              newproducts.map((product)=>(
-              <li key={product.id}><CardCart id={product.id} nombreProducto={product.nombreProducto} precio={product.precio}/></li>))
+              cartItems.map((product)=>(
+              <CardCart key={product.id} id={product.id} nombreProducto={product.nombreProducto} precio={product.precio} image={product.image}/>))
             }
           </ul>
         </div>
