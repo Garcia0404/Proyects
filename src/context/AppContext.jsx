@@ -1,4 +1,4 @@
-import { createContext,useState } from "react";
+import { createContext,useEffect,useState } from "react";
 
 export const UsuarioContext = createContext()
 
@@ -8,8 +8,17 @@ export const AppContext = ({ children }) => {
     setOpenShop(!openShop)
     document.body.style.overflow = openShop ? 'auto':'hidden';
   }
+
+  const [cartItems,setCartItems] = useState([])
+  function addCart(product){
+    setCartItems([...cartItems,product])
+    console.log(cartItems)
+  }
+
+
+  
   return (
-    <UsuarioContext.Provider value={{openShop,openShoppingCart}}>
+    <UsuarioContext.Provider value={{openShop,openShoppingCart,cartItems,setCartItems,addCart}}>
       { children }
     </UsuarioContext.Provider>
   )
